@@ -6,6 +6,7 @@ import com.otavio.apirest.model.Usuario;
 import com.otavio.apirest.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,5 +18,10 @@ public class UsuarioServiceImpl extends CrudService<Usuario, Long> implements Us
     @Override
     protected JpaRepository<Usuario, Long> data() {
         return data;
+    }
+
+    @Override
+    public UserDetails findByUsername(String email) {
+        return data.findUsuarioByEmail(email);
     }
 }
