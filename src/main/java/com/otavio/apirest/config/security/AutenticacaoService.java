@@ -1,6 +1,5 @@
 package com.otavio.apirest.config.security;
 
-import com.otavio.apirest.model.Usuario;
 import com.otavio.apirest.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
