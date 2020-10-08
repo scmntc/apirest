@@ -1,5 +1,6 @@
 package com.otavio.apirest.config.security;
 
+import com.otavio.apirest.config.security.dto.TokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,13 +29,12 @@ public class AutenticacaoController {
     @Autowired TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form) {
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 
         Authentication authentication = authenticationManager.authenticate(dadosLogin);
         String token = tokenService.gerarToken(authentication);
-        System.out.println(token);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 
     }
 }
